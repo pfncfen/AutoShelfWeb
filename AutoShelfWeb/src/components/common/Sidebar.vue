@@ -15,7 +15,7 @@
                 </template>
                 <template v-else>
                     <el-menu-item :index="item.index" :key="item.index">
-                        <i :class="item.icon"></i><span slot="title">{{ item.title }}</span>
+                        <i :class="item.icon"></i><span slot="title">{{ item.title}}</span>
                     </el-menu-item>
                 </template>
             </template>
@@ -31,63 +31,36 @@
                 collapse: false,
                 items: [
                     {
-                        icon: 'el-icon-setting',
+                        icon: 'el-icon-info',
                         index: 'readme',
-                        title: '自述文件'
+                        title: 'Introduction'
                     },
                     {
                         icon: 'el-icon-tickets',
                         index: '2',
-                        title: '常用表格',
+                        title: 'Store Overview',
                         subs: [
                             {
                                 index: 'table',
-                                title: '基础表格'
+                                title: 'Store Information'
                             },
                             {
-                                index: 'datasource',
-                                title: 'datasource表格'
+                                index: 'ShelfTable',
+                                title: 'Shelf Overview'
                             }
                         ]
                     },
                     {
-                        icon: 'el-icon-date',
+                        icon: 'el-icon-tickets',
                         index: '3',
-                        title: '表单相关',
+                        title: 'Product Overview',
                         subs: [
                             {
-                                index: 'form',
-                                title: '基本表单'
+                                index: 'ProductTable',
+                                title: '基础表格'
                             },
-                            {
-                                index: 'editor',
-                                title: '富文本编辑器'
-                            },
-                            {
-                                index: 'markdown',
-                                title: 'markdown编辑器'
-                            },
-                            {
-                                index: 'upload',
-                                title: '文件上传'
-                            }
                         ]
                     },
-                    {
-                        icon: 'el-icon-star-on',
-                        index: 'charts',
-                        title: 'schart图表'
-                    },
-                    {
-                        icon: 'el-icon-rank',
-                        index: 'drag',
-                        title: '拖拽列表'
-                    },
-                    {
-                        icon: 'el-icon-warning',
-                        index: 'permission',
-                        title: '权限测试'
-                    }
                 ]
             }
         },
@@ -97,7 +70,6 @@
             }
         },
         created(){
-            // 通过 Event Bus 进行组件间通信，来折叠侧边栏
             bus.$on('collapse', msg => {
                 this.collapse = msg;
             })

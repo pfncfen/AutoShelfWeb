@@ -15,11 +15,19 @@ export default new Router({
             children:[
                 {
                     path: '/',
-                    component: resolve => require(['../components/page/Readme.vue'], resolve)
+                    component: resolve => require(['../components/page/Infomation.vue'], resolve)
                 },
                 {
                     path: '/table',
-                    component: resolve => require(['../components/page/BaseTable.vue'], resolve)
+                    component: resolve => require(['../components/page/StoreTable.vue'], resolve)
+                },
+                {
+                    path: '/ProductTable',
+                    component: resolve => require(['../components/page/ProductTable.vue'], resolve)
+                },
+                {
+                    path: '/ShelfTable',
+                    component: resolve => require(['../components/page/ShelfTable.vue'], resolve)
                 },
                 {
                     // vue-datasource组件
@@ -40,11 +48,7 @@ export default new Router({
                     path: '/markdown',
                     component: resolve => require(['../components/page/Markdown.vue'], resolve)     
                 },
-                {
-                    // 图片上传组件
-                    path: '/upload',
-                    component: resolve => require(['../components/page/Upload.vue'], resolve)       
-                },
+
                 {
                     // vue-schart组件
                     path: '/charts',
