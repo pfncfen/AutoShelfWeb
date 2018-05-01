@@ -35,11 +35,6 @@ export default new Router({
                     component: resolve => require(['../components/page/VueTable.vue'], resolve)     
                 },
                 {
-                    path: '/form',
-                    component: resolve => require(['../components/page/BaseForm.vue'], resolve)
-                },
-
-                {
                     // vue-schart组件
                     path: '/charts',
                     component: resolve => require(['../components/page/BaseCharts.vue'], resolve)   

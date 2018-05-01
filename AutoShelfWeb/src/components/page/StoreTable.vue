@@ -50,7 +50,7 @@
         data() {
             return {
                 //TODO: Set Autoshelf api here.
-                url: './static/vuetable.json',
+                url: './stores',
                 tableData: [],
                 cur_page: 1,
                 multipleSelection: [],

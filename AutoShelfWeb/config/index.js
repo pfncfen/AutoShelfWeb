@@ -12,7 +12,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api':{
-          target:'http://jsonplaceholder.typicode.com',
+          target:'http://sp18-cs411-dso-004.cs.illinois.edu',
           changeOrigin:true,
           pathRewrite:{
               '/api':''
