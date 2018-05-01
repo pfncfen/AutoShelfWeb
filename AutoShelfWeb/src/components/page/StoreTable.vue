@@ -49,6 +49,7 @@
     export default {
         data() {
             return {
+                //TODO: Set Autoshelf api here.
                 url: './static/vuetable.json',
                 tableData: [],
                 cur_page: 1,
@@ -84,17 +85,16 @@
             }
         },
         methods: {
-            // 分页导航
+
             handleCurrentChange(val){
                 this.cur_page = val;
                 this.getData();
             },
-            // 获取 easy-mock 的模拟数据
+
             getData(){
-                // 开发环境使用 easy-mock 数据，正式环境使用 json 文件
+
                 if(process.env.NODE_ENV === 'development'){
                     this.url = '/ms/table/list';
-                    //this.url = './static/vuetable.json';
                 };
                 this.$axios.post(this.url, {page:this.cur_page}).then((res) => {
                     this.tableData = res.data.list;
@@ -111,19 +111,6 @@
             },
             handleEdit(index, row) {
                 this.$message('Go to Store'+(index+1));
-            },
-            handleDelete(index, row) {
-                this.$message.error('删除第'+(index+1)+'行');
-            },
-            delAll(){
-                const length = this.multipleSelection.length;
-                let str = '';
-                this.del_list = this.del_list.concat(this.multipleSelection);
-                for (let i = 0; i < length; i++) {
-                    str += this.multipleSelection[i].name + ' ';
-                }
-                this.$message.error('删除了'+str);
-                this.multipleSelection = [];
             },
             handleSelectionChange(val) {
                 this.multipleSelection = val;

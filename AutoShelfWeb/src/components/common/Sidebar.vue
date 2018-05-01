@@ -57,7 +57,7 @@
                         subs: [
                             {
                                 index: 'ProductTable',
-                                title: '基础表格'
+                                title: 'Products'
                             },
                         ]
                     },
