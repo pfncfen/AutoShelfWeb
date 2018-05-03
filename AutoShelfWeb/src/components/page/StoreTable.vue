@@ -12,7 +12,7 @@
                 </el-select>
                 <el-input v-model="select_word" placeholder="Search with keywords" class="handle-input mr10"></el-input>
             </div>
-            <el-table :data="data" border style="width: 100%" ref="multipleTable" @selection-change="handleSelectionChange">
+            <el-table :data="data" border style="width: 100%" ref="multipleTable" @selection-change="handleSelectionChange" @row-click="rowClick">
                 <el-table-column label="Operation" width="150" align="center">
                     <template slot-scope="scope">
                         <el-button size="small"
@@ -32,7 +32,7 @@
                         <i class="el-icon-warning"></i>
                     </template>
                 </el-table-column>
-                
+
             </el-table>
             <div class="pagination">
                 <el-pagination
@@ -74,7 +74,7 @@
                         }
                     }
                     if(!is_del){
-                        if(d.address.indexOf(this.select_cate) > -1 && 
+                        if(d.address.indexOf(this.select_cate) > -1 &&
                             (d.name.indexOf(this.select_word) > -1 ||
                             d.address.indexOf(this.select_word) > -1)
                         ){
@@ -85,6 +85,11 @@
             }
         },
         methods: {
+
+            rowClick(row, event, column) {
+                console.log(row, event, column)
+                this.$router.push('/ShelfTable?queryId=' + row.date)
+            },
 
             handleCurrentChange(val){
                 this.cur_page = val;

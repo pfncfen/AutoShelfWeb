@@ -78,7 +78,7 @@
                         }
                     }
                     if(!is_del){
-                        if(d.address.indexOf(this.select_cate) > -1 && 
+                        if(d.address.indexOf(this.select_cate) > -1 &&
                             (d.name.indexOf(this.select_word) > -1 ||
                             d.address.indexOf(this.select_word) > -1)
                         ){
@@ -100,6 +100,11 @@
                 };
                 this.$axios.post(this.url, {page:this.cur_page}).then((res) => {
                     this.tableData = res.data.list;
+                    console.log(this.$route.query)  //利用url里面的queryString传递页面之间的数据
+                    if(this.$route.query.queryId) {
+                        let selected = this.tableData.filter( data => data.id ===  this.$route.query.queryId)  //从整个的tabledata里面选出指定ID的数据
+                        this.select_cate = selected.category   //将页面上的select框置为该数据的分类
+                    }
                 })
             },
             search(){
