@@ -1,38 +1,42 @@
 <template>
     <div class="table">
         <div class="crumbs">
-            <i class="el-icon-view"></i><span>Overview: Store Overview</span>
+            <i class="el-icon-view"></i><span>Overview: Shelf Overview</span>
         </div>
         <div class="container">
             <div class="handle-box">
-                <el-select v-model="select_cate" placeholder="State" class="handle-select mr10">
+                <el-select v-model="select_cate" placeholder="Store" class="handle-select mr10">
+                    <el-option key="1" label="Store 1" value="Store 1"></el-option>
+                    <el-option key="2" label="Store 2" value="Store 2"></el-option>
+                    <el-option key="3" label="Store 3" value="Store 4"></el-option>
+                    <el-option key="4" label="Store 4" value="Store 5"></el-option>
+                    <el-option key="5" label="Store 5" value="Store 6"></el-option>
+                </el-select>
+                <el-select v-model="select_cate" placeholder="Shelf" class="handle-select mr10">
                     <el-option key="1" label="UT" value="Utah"></el-option>
                     <el-option key="2" label="CA" value="California"></el-option>
-                    <el-button type="primary" icon="search" @click="search">Search</el-button>
                 </el-select>
-                <el-input v-model="select_word" placeholder="Search with keywords" class="handle-input mr10"></el-input>
             </div>
-            <el-table :data="data" border style="width: 100%" ref="multipleTable" @selection-change="handleSelectionChange" @row-click="rowClick">
-                <el-table-column label="Operation" width="150" align="center">
+
+            <div class="handle-box">
+                <el-input v-model="select_word" placeholder="Search with product keywords" class="handle-input mr10"></el-input>
+                <el-button type="primary" icon="search" @click="search">Search</el-button>
+            </div>
+
+            <el-table :data="data" border style="width: 100%" ref="multipleTable" @selection-change="handleSelectionChange">
+
+                <el-table-column prop="date" label="Shelf ID" sortable width="150">
+                </el-table-column>
+                <el-table-column prop="name" label="Shelf Location" width="400" >
+                </el-table-column>
+                <el-table-column prop="address" label="Address" :formatter="formatter">
+                </el-table-column>
+                <el-table-column label="Operation" width="200" align="center">
                     <template slot-scope="scope">
                         <el-button size="small"
-                                @click="handleEdit(scope.$index, scope.row)">Go to Store</el-button>
+                                @click="handleEdit(scope.$index, scope.row)">View Details</el-button>
                     </template>
                 </el-table-column>
-                <el-table-column prop="date" label="Store ID" sortable width="150">
-                </el-table-column>
-                <el-table-column prop="name" label="Owner" width="200">
-                </el-table-column>
-                <el-table-column prop="address" label="Address">
-                </el-table-column>
-                <el-table-column prop="name" label="Phone Number" width="200">
-                </el-table-column>
-                <el-table-column label="Status"  width="100" align="center">
-                    <template slot-scope="scope">
-                        <i class="el-icon-warning"></i>
-                    </template>
-                </el-table-column>
-
             </el-table>
             <div class="pagination">
                 <el-pagination
@@ -49,8 +53,8 @@
     export default {
         data() {
             return {
-                //TODO: Set Autoshelf api here.
-                url: './stores',
+                //TODO: Add AutoShelf api here.
+                url: './static/vuetable.json',
                 tableData: [],
                 cur_page: 1,
                 multipleSelection: [],
@@ -85,24 +89,22 @@
             }
         },
         methods: {
-
-            rowClick(row, event, column) {
-                console.log(row, event, column)  //element-ui 文档里有这个方法和对应的参数
-                this.$router.push('/ShelfTable?queryId=' + row.date)  //利用url里面的queryString传递页面之间的数据
-            },
-
             handleCurrentChange(val){
                 this.cur_page = val;
                 this.getData();
             },
-
             getData(){
-
+                //This is only for development.
                 if(process.env.NODE_ENV === 'development'){
                     this.url = '/ms/table/list';
                 };
                 this.$axios.post(this.url, {page:this.cur_page}).then((res) => {
                     this.tableData = res.data.list;
+                    console.log(this.$route.query)  //利用url里面的queryString传递页面之间的数据
+                    if(this.$route.query.queryId) {
+                        let selected = this.tableData.filter( data => data.id ===  this.$route.query.queryId)  //从整个的tabledata里面选出指定ID的数据
+                        this.select_cate = selected.category   //将页面上的select框置为该数据的分类
+                    }
                 })
             },
             search(){
@@ -115,7 +117,7 @@
                 return row.tag === value;
             },
             handleEdit(index, row) {
-                this.$message('Go to Store'+(index+1));
+                this.$message('编辑第'+(index+1)+'行');
             },
             handleSelectionChange(val) {
                 this.multipleSelection = val;

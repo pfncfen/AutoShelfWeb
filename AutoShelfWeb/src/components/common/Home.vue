@@ -3,6 +3,7 @@
         <v-head></v-head>
         <v-sidebar></v-sidebar>
         <div class="content" :class="{'content-collapse':collapse}">
+            欢迎进入nmw运营管理后台
             <transition name="move" mode="out-in"><router-view></router-view></transition>
         </div>
     </div>

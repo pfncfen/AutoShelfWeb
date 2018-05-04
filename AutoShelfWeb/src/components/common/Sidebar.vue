@@ -2,6 +2,7 @@
     <div class="sidebar">
         <el-menu class="sidebar-el-menu" :default-active="onRoutes" :collapse="collapse" background-color="#324157"
             text-color="#bfcbd9" active-text-color="#20a0ff" unique-opened router>
+
             <template v-for="item in items">
                 <template v-if="item.subs">
                     <el-submenu :index="item.index" :key="item.index">
@@ -32,33 +33,41 @@
                 items: [
                     {
                         icon: 'el-icon-info',
-                        index: 'readme',
-                        title: 'Introduction'
-                    },
-                    {
-                        icon: 'el-icon-tickets',
-                        index: '2',
-                        title: 'Store Overview',
+                        index: 'userMng',
+                        title: '用户管理',
                         subs: [
                             {
-                                index: 'table',
-                                title: 'Store Information'
+                                index: 'investList',
+                                title: '投资人列表'
                             },
                             {
-                                index: 'ShelfTable',
-                                title: 'Shelf Overview'
+                                index: 'lendList',
+                                title: '借款人列表'
+                            },
+                            {
+                                index: 'corpList',
+                                title: '商户列表'
                             }
                         ]
                     },
                     {
                         icon: 'el-icon-tickets',
-                        index: '3',
-                        title: 'Product Overview',
+                        index: 'trades',
+                        title: '交易管理'
+                    },
+                    {
+                        icon: 'el-icon-tickets',
+                        index: 'tickets',
+                        title: '标的管理',
                         subs: [
                             {
-                                index: 'ProductTable',
-                                title: 'Products'
+                                index: 'assetPkg',
+                                title: '资产包列表'
                             },
+                            {
+                                index: 'protocol',
+                                title: '协议管理'
+                            }
                         ]
                     },
                 ]
